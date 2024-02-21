@@ -7,14 +7,14 @@ import torch
 from auto_gptq import AutoGPTQForCausalLM
 from flask import Flask, jsonify, request
 from langchain.chains import RetrievalQA
-from langchain.embeddings import HuggingFaceInstructEmbeddings
+from langchain_community.embeddings import HuggingFaceInstructEmbeddings
 
 # from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.llms import HuggingFacePipeline
+from langchain_community.llms import HuggingFacePipeline
 from run_localGPT import load_model
 
 # from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 from transformers import (
     AutoModelForCausalLM,
     AutoTokenizer,

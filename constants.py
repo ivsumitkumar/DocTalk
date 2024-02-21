@@ -4,7 +4,7 @@ import os
 from chromadb.config import Settings
 
 # https://python.langchain.com/en/latest/modules/indexes/document_loaders/examples/excel.html?highlight=xlsx#microsoft-excel
-from langchain.document_loaders import CSVLoader, PDFMinerLoader, TextLoader, UnstructuredExcelLoader, Docx2txtLoader
+from langchain_community.document_loaders import CSVLoader, PDFMinerLoader, TextLoader, UnstructuredExcelLoader, Docx2txtLoader
 
 # load_dotenv()
 ROOT_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
@@ -91,7 +91,7 @@ MODEL_BASENAME = "llama-2-7b-chat.ggmlv3.q4_0.bin"
 # MODEL_ID = "TheBloke/Llama-2-13b-Chat-GGUF"
 # MODEL_BASENAME = "llama-2-13b-chat.Q4_0.gguf"
 
-# MODEL_ID = "TheBloke/Llama-2-7b-Chat-GGUF"
+# MODEL_ID = "TheBloke/Llama-2-7B-Chat-GGUF"
 # MODEL_BASENAME = "llama-2-7b-chat.Q4_K_M.gguf"
 
 # MODEL_ID = "TheBloke/Llama-2-70b-Chat-GGUF"
@@ -124,7 +124,7 @@ MODEL_BASENAME = "llama-2-7b-chat.ggmlv3.q4_0.bin"
 # MODEL_BASENAME = "model.safetensors"
 # MODEL_ID = "TheBloke/gpt4-alpaca-lora_mlp-65B-GPTQ"
 # MODEL_BASENAME = "model.safetensors"
-# MODEL_ID = "TheBloke/Upstage-Llama1-65B-Instruct-GPTQ" 
+# MODEL_ID = "TheBloke/Upstage-Llama1-65B-Instruct-GPTQ"
 # MODEL_BASENAME = "model.safetensors"    
 
 ##### 24GB VRAM Graphics Cards (RTX 3090 - RTX 4090 (35% Faster) - RTX A5000 - RTX A5500) #####

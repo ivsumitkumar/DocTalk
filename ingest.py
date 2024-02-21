@@ -7,9 +7,9 @@ from typing import List, Tuple
 import click
 import torch
 from langchain.docstore.document import Document
-from langchain.embeddings import HuggingFaceInstructEmbeddings
+from langchain_community.embeddings import HuggingFaceInstructEmbeddings
 from langchain.text_splitter import Language, RecursiveCharacterTextSplitter
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 from mongoDB import fetchFromMongoDB
 from constants import (
     CHROMA_SETTINGS,
@@ -168,6 +168,6 @@ def main(device_type):
 
 if __name__ == "__main__":
     logging.basicConfig(
-        format="%(asctime)s - %(levelname)s - %(filename)s:%(lineno)s - %(message)s", level=logging.INFO
+        format="%(asctime)s - %(levelname)s - %(filename)s: %(lineno)s - %(message)s", level=logging.INFO
     )
     main()

@@ -4,6 +4,7 @@ import logging
 from constants import MONGODB_DIRECTORY
 
 
+
 def fetchFromMongoDB(
         MONGO_URI: str,
         MONGO_DATABASE: str,
@@ -14,7 +15,7 @@ def fetchFromMongoDB(
     try:
         client.admin.command('ping')
         logging.info(
-            "Pinged your deployment. You successfully connected to MongoDB!")
+            "Successfully connected to MongoDB....")
     except Exception as e:
         logging.info(e)
     db = client[MONGO_DATABASE]
@@ -75,5 +76,5 @@ def fetchFromMongoDB(
 
             # print("#"*50)
             file.write("\n"*3)
-    print("Completed!!!!!!!!!!!!!")
+    logging.info("Completed!!!!!!!!!!!!!")
     return MONGODB_DIRECTORY
