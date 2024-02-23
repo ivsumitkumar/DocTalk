@@ -6,6 +6,7 @@ fsspec==2023.5.0
 importlib-metadata==6.5.0
 InstructorEmbedding==1.0.1
 sentence-transformers==2.2.2
+torch==2.2.0
 faiss-cpu
 huggingface-hub==0.20.3
 transformers==4.37.2
