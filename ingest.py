@@ -9,8 +9,8 @@ import torch
 from langchain.docstore.document import Document
 from langchain_community.embeddings import HuggingFaceInstructEmbeddings
 from langchain.text_splitter import Language, RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Chroma
-from mongoDB import fetchFromMongoDB
+from langchain_community.vectorstores.chroma import Chroma
+# from mongoDB import fetchFromMongoDB
 from constants import (
     CHROMA_SETTINGS,
     DOCUMENT_MAP,
@@ -21,7 +21,7 @@ from constants import (
 )
 
 
-def load_single_document(file_path: str) -> Document:
+def load_single_document(file_path: str) -> 'Document':
     # Loads a single document from a file path
     file_extension = os.path.splitext(file_path)[1]
     loader_class = DOCUMENT_MAP.get(file_extension)
@@ -44,7 +44,7 @@ def load_document_batch(filepaths):
         return (data_list, filepaths)
 
 
-def load_documents(source_dir: str) -> List[Document]:
+def load_documents(source_dir: str) -> List['Document']:
     # Loads all documents from the source documents directory, including nested folders
     paths = []
     for root, _, files in os.walk(source_dir):
@@ -77,7 +77,7 @@ def load_documents(source_dir: str) -> List[Document]:
     return docs
 
 
-def split_documents(documents: List[Document]) -> Tuple[List[Document], List[Document]]:
+def split_documents(documents: List['Document']) -> Tuple[List['Document'], List['Document']]:
     # Splits documents for correct Text Splitter
     text_docs, python_docs = [], []
     for doc in documents:
@@ -120,19 +120,20 @@ def split_documents(documents: List[Document]) -> Tuple[List[Document], List[Doc
     help="Device to run on. (Default is cuda)",
 )
 def main(device_type):
+    print('in main()')
     # Load documents and split in chunks
     logging.info(f"Loading documents from {SOURCE_DIRECTORY}")
     documents = load_documents(SOURCE_DIRECTORY)
     # documents = []
-    logging.info("Want to load data from MongoDB [Y/N]?")
-    x=input("Want to load data from MongoDB [Y/N]?")
-    if x.capitalize() in ["Y","Yes"]:
-        MONGODB_DIRECTORY = fetchFromMongoDB(
-            MONGO_URI="mongodb://localhost:27017/",
-            MONGO_DATABASE="enhedu-news",
-            MONGO_COLLECTION="newsFeedBackup28Aug"
-            )
-        documents.extend(load_documents(MONGODB_DIRECTORY))
+    # logging.info("Want to load data from MongoDB [Y/N]?")
+    # x=input("Want to load data from MongoDB [Y/N]?")
+    # if x.capitalize() in ["Y","Yes"]:
+    #     MONGODB_DIRECTORY = fetchFromMongoDB(
+    #         MONGO_URI="mongodb://localhost:27017/",
+    #         MONGO_DATABASE="enhedu-news",
+    #         MONGO_COLLECTION="newsFeedBackup28Aug"
+    #         )
+    #     documents.extend(load_documents(MONGODB_DIRECTORY))
     logging.info(f"Loaded {len(documents)} documents from {SOURCE_DIRECTORY}")
 
     text_documents, python_documents = split_documents(documents)
@@ -170,4 +171,5 @@ if __name__ == "__main__":
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(filename)s: %(lineno)s - %(message)s", level=logging.INFO
     )
+    print('in ingest.py')
     main()

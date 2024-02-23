@@ -44,18 +44,22 @@ if os.path.exists(PERSIST_DIRECTORY):
 else:
     print("The directory does not exist")
 
-run_langest_commands = ["python", "ingest.py"]
+# run_langest_commands = ["python3", "ingest.py"]
+run_langest_commands = [r"/home/sumit/Desktop/Projects/LocalGPT/venv/bin/python3", "ingest.py"]
+
 if DEVICE_TYPE == "cpu":
     run_langest_commands.append("--device_type")
     run_langest_commands.append(DEVICE_TYPE)
 
-result = subprocess.run(run_langest_commands, capture_output=True)
+print('Ingesting Documents....')
+result = subprocess.run(run_langest_commands, capture_output=True, check= False)
 if result.returncode != 0:
     raise FileNotFoundError(
         "No files were found inside SOURCE_DOCUMENTS, please put a starter file inside before starting the API!"
     )
 
 # load the vectorstore
+print('Loading vectorstore...')
 DB = Chroma(
     persist_directory=PERSIST_DIRECTORY,
     embedding_function=EMBEDDINGS,
@@ -84,7 +88,7 @@ def delete_source_route():
 
     return jsonify({"message": f"Folder '{folder_name}' successfully deleted and recreated."})
 
-@app.route("/api/delete_mongodocs",method=["GET"])
+@app.route("/api/delete_mongodocs",methods=["GET"])
 def delete_mongodocs_route():
     folder_name = "MONGO_DOCUMENTS"
 
@@ -127,7 +131,7 @@ def run_ingest_route():
         else:
             print("The directory does not exist")
 
-        run_langest_commands = ["python", "ingest.py"]
+        run_langest_commands = [r"/home/sumit/Desktop/Projects/LocalGPT/venv/bin/python3", "ingest.py"]
         if DEVICE_TYPE == "cpu":
             run_langest_commands.append("--device_type")
             run_langest_commands.append(DEVICE_TYPE)
